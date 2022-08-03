@@ -1,8 +1,10 @@
-import 'package:best_calculation/components/measurment/rulerTabItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import '../components/mainPage/calculator.dart';
+import '../components/measurment/measurementPage.dart';
 import '../utils/constants.dart';
+import '../utils/enums.dart';
 
 class RulerPage extends StatefulWidget {
   const RulerPage({Key? key, required this.size}) : super(key: key);
@@ -64,54 +66,48 @@ class _RulerPageState extends State<RulerPage> with TickerProviderStateMixin {
       bodies.add(
         Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              height: widget.size.height * 0.4,
-              child: Row(
-                children: [
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                      label: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: value.keys.first,
-                          style: TextStyle(
-                              color: mainColorTheme1,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: "\n${value.values.first.keys.first}",
-                                style: TextStyle(
-                                    color: mainColorTheme1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 35)),
-                          ],
+            measurementTop(
+                widget.size,
+                value,
+                () => {
+                      showMaterialModalBottomSheet(
+                        context: context,
+                        builder: (context) => SingleChildScrollView(
+                          // controller: modalScrollController,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              image: DecorationImage(
+                                image: AssetImage("assets/theme1/bg_big.png"),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            height: widget.size.height * 0.62,
+                            child: Flexible(
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: value.values.length,
+                                itemBuilder: ((context, index) =>
+                                    measurementEmptyListItem(index, value, () {
+                                      print("");
+                                    }, isValuable: true)),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: TextField(
-                      textAlign: TextAlign.end,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none
-                      ),
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w500,
-                        color: mainColorTheme1
-                      ),
-
-                    ),
-                  ),
-                ],
+                      )
+                    },
+                context),
+            Flexible(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: value.values.length,
+                itemBuilder: ((context, index) =>
+                    measurementListItem(index, value, () {
+                      print("");
+                    })),
               ),
             ),
-            ListView.builder(itemBuilder: itemBuilder)
           ],
         ),
       );

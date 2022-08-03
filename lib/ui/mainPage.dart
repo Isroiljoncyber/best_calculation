@@ -1,5 +1,6 @@
 import 'package:best_calculation/ui/calculatorPage.dart';
 import 'package:best_calculation/ui/rulerPage.dart';
+import 'package:best_calculation/utils/Routes.dart';
 import 'package:best_calculation/utils/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,7 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage>
-    with TickerProviderStateMixin {
-
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
 
@@ -43,7 +42,9 @@ class _MainPageState extends State<MainPage>
             ),
             actions: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.settingPage);
+                },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10, left: 10),
                   child: Image(
@@ -144,7 +145,7 @@ class _MainPageState extends State<MainPage>
                   const Center(
                     child: Text("It's rainy here"),
                   ),
-                 RulerPage(size: size)
+                  RulerPage(size: size)
                 ],
               ),
             ),

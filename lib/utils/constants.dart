@@ -14,7 +14,7 @@ Map<String, Map<String, Map<String, double>>> measurmentList = {
   "COOKING": cookingList
 };
 
-// Ruler constants
+// Ruler constantsfirst
 Map<String, Map<String, double>> distancesList = {
   "metre": {"m": 1},
   "millimetre": {"mm": 1000},
@@ -23,7 +23,7 @@ Map<String, Map<String, double>> distancesList = {
   "foot": {"ft": 3.28084},
   "yard": {"yd": 1.093613},
   "kilometre": {"km": 0.001},
-  "nmi": {"nautical mile": 0.00054},
+  "nautical mile": {"nmi": 0.00054},
 };
 
 Map<String, Map<String, double>> areasList = {
